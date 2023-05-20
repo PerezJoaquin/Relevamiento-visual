@@ -1,0 +1,106 @@
+<ion-header style="background-color:rgba(0, 0, 0, 0.467)">
+  <ion-toolbar color="translucent">
+    <table style="width:100%" >
+      <tr>
+        <th style="width:33%">
+          <div class="ion-text-start">
+            <ion-button color="secondary" style="margin-left: 5px;left: auto;" (click)="camera()">
+              <ion-icon name="camera-reverse-outline" color="light"></ion-icon>
+            </ion-button>  
+          </div>
+        </th>
+        <th style="width:33%" *ngIf="modo=='resultados'">
+          Resultados
+        </th>
+        <th style="width:33%" *ngIf="modo=='misfotos'">
+          Mis fotos
+        </th>
+        <th style="width:33%">
+          <div class="ion-text-end">
+            <ion-button color="danger" style="margin-right: 5px;left: auto;" (click)="logout()">
+              <ion-icon name="exit-outline" color="light"></ion-icon>
+            </ion-button>  
+          </div>
+        </th>
+      </tr>
+    </table>
+  </ion-toolbar>
+</ion-header>
+
+<!--header---->
+
+<ion-content fullscreen="true"  >
+  <div *ngIf="modo=='misfotos'">
+    <div *ngFor="let foto of lindascol">
+      <ion-card style="padding:10px" *ngIf="foto.usuario.usuario == userr.usuario"> 
+        <ion-card-title>Linda</ion-card-title> <br>
+        <ion-img src="{{foto.foto}}"></ion-img><br>
+        <ion-card-subtitle>{{foto.fechaplana}}</ion-card-subtitle>
+        <ion-card-subtitle>Votos:{{foto.votos}}</ion-card-subtitle>
+        <br>
+      </ion-card>
+    </div>
+  <div *ngFor="let foto of feascol">
+    <ion-card style="padding:10px" *ngIf="foto.usuario.usuario == userr.usuario"> 
+      <ion-card-title>Fea</ion-card-title> <br>
+      <ion-img src="{{foto.foto}}"></ion-img><br>
+      <ion-card-subtitle>{{foto.fechaplana}}</ion-card-subtitle>
+      <ion-card-subtitle>Votos:{{foto.votos}}</ion-card-subtitle>
+      <br>
+    </ion-card>
+  </div>
+</div>
+  <div [hidden]="modo=='misfotos'">
+    <ion-card style="padding:10px">
+      <ion-card-title>Cosas Feas</ion-card-title>
+      <div class="chart-container">
+        <canvas  id="MyChart" >{{ chart }}</canvas>
+      </div>
+    </ion-card>
+
+    <ion-card style="padding:10px">
+      <ion-card-title>Cosas Lindas</ion-card-title>
+      <div class="chart-container">
+        <canvas  id="MyDonut" >{{ chartDon }}</canvas>
+      </div>
+    </ion-card>
+  </div>
+</ion-content>
+<!--ion-content fullscreen="true" >
+  
+</ion-content-->
+
+
+<!--footer-->
+
+<ion-footer style="background-color:rgba(0, 0, 0, 0.467);padding-top: 3px;">
+  
+  <table style="width:100%">
+    <tr>
+      <th>
+        <ion-button color="primary" (click)="galeria()">
+          Votar
+        </ion-button>
+      </th>
+      <th>
+        <ion-button color="primary" (click)="misfotos()" *ngIf="modo=='resultados'">
+          Mis fotos
+        </ion-button>
+        <ion-button color="warning" (click)="misfotos()" *ngIf="modo=='misfotos'">
+          Mis fotos
+        </ion-button>
+      </th>
+      <th>
+        <ion-button color="primary" (click)="resuta()" *ngIf="modo=='misfotos'">
+          Resultados
+        </ion-button>
+      </th>
+      <th>
+        <ion-button color="warning" (click)="resuta()" *ngIf="modo=='resultados'">
+          Resultados
+        </ion-button>
+      </th>
+    </tr>
+  </table>
+
+</ion-footer>

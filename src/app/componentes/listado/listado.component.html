@@ -1,0 +1,95 @@
+<ion-header style="background-color:rgba(0, 0, 0, 0.467)">
+  <ion-toolbar color="translucent">
+    <table style="width:100%" >
+      <tr>
+        <th style="width:33%">
+          <div class="ion-text-start">
+            <ion-button color="secondary" style="margin-left: 5px;left: auto;" (click)="recam()">
+              <ion-icon name="camera-reverse-outline" color="light"></ion-icon>
+            </ion-button>  
+          </div>
+        </th>
+        <th style="width:33%" *ngIf="modo=='lindas'">
+          Galería de cosas lindas
+        </th>
+        <th style="width:33%" *ngIf="modo=='feas'">
+          Galería de cosas feas
+        </th>
+        <th style="width:33%">
+          <div class="ion-text-end">
+            <ion-button color="danger" style="margin-right: 5px;left: auto;" (click)="logout()">
+              <ion-icon name="exit-outline" color="light"></ion-icon>
+            </ion-button>  
+          </div>
+        </th>
+      </tr>
+    </table>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true" *ngIf="modo=='lindas'">
+  <ion-card *ngFor="let foto of lindascol | async" style="padding:10px">
+    
+    <ion-card-title>Foto de: {{foto.usuario.usuario}}</ion-card-title> <br>
+    <ion-img src="{{foto.foto}}"></ion-img><br>
+    <ion-card-subtitle>{{foto.fechaplana}}</ion-card-subtitle>
+    <ion-card-subtitle>Votos:{{foto.votos}}</ion-card-subtitle>
+    <br>
+    <ion-button *ngIf="foto.id!=logg.idlinda" [disabled]="logg.votolinda" color="primary" (click)="votarLinda(foto)">
+      votar
+    </ion-button>
+    <ion-button *ngIf="foto.id==logg.idlinda" color="warning" (click)="devotarLinda(foto)">
+      votado
+    </ion-button>
+  </ion-card>
+</ion-content>
+
+
+<!--feas-->
+<ion-content fullscreen="true" *ngIf="modo=='feas'">
+  <ion-card *ngFor="let foto of feascol | async" style="padding:10px">
+    
+    <ion-card-title>Foto de: {{foto.usuario.usuario}}</ion-card-title> <br>
+    <ion-img src="{{foto.foto}}"></ion-img><br>
+    <ion-card-subtitle>{{foto.fechaplana}}</ion-card-subtitle>
+    <ion-card-subtitle>Votos:{{foto.votos}}</ion-card-subtitle>
+    <br>
+    <ion-button *ngIf="foto.id!=logg.idfea" [disabled]="logg.votofea" color="primary" (click)="votarFea(foto)">
+      votar
+    </ion-button>
+    <ion-button *ngIf="foto.id==logg.idfea" color="warning" (click)="devotarFea(foto)">
+      votado
+    </ion-button>
+  </ion-card>
+</ion-content>
+ 
+
+<ion-footer style="background-color:rgba(0, 0, 0, 0.467);padding-top: 3px;">
+  
+    <table style="width:100%">
+      <tr>
+        <th>
+          <ion-button color="warning" *ngIf="modo=='lindas'">
+            Votar linda
+          </ion-button>
+          <ion-button color="primary" *ngIf="modo!='lindas'" (click)="cambiarModo()">
+            Votar linda
+          </ion-button>
+        </th>
+        <th>
+          <ion-button color="warning" *ngIf="modo=='feas'">
+            Votar fea
+          </ion-button>
+          <ion-button color="primary" *ngIf="modo!='feas'" (click)="cambiarModo()">
+            Votar fea
+          </ion-button>
+        </th>
+        <th>
+          <ion-button (click)="irGraficos()">
+            Resultados
+          </ion-button>
+        </th>
+      </tr>
+    </table>
+ 
+</ion-footer>

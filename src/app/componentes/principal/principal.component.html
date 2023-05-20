@@ -1,0 +1,179 @@
+<ion-header *ngIf="!showbuttons" style="background-color:rgba(0, 0, 0, 0.467)">
+  <ion-toolbar color="translucent">
+    <table style="width:100%">
+      <tr>
+        <th style="width:33%">
+          <div class="ion-text-start">
+            <ion-button color="tertiary" style="margin-left: 5px;right: auto;" (click)="list()">
+              <ion-icon name="menu-outline" color="light"></ion-icon>
+            </ion-button>  
+          </div>
+        </th>
+        <th style="width:33%" *ngIf="localsele=='lindas'">
+          Subir foto
+        </th>
+        <th style="width:33%" *ngIf="localsele=='feas'">
+          Subir foto
+        </th>
+        <th style="width:33%">
+          <div class="ion-text-end">
+            <ion-button color="danger" style="margin-right: 5px;left: auto;" (click)="logou()">
+              <ion-icon name="exit-outline" color="light"></ion-icon>
+            </ion-button>  
+          </div>
+        </th>
+      </tr>
+    </table>
+    
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+
+  <!--div *ngFor="let file of images">
+
+    <ion-img src="{{file.data}}"></ion-img>
+  </div>
+
+  <ion-list>
+    <ion-item *ngFor="let file of images">
+      <ion-img [src]="file.data"></ion-img>
+    </ion-item>
+  </ion-list-->
+
+
+
+  <ion-grid *ngIf="showbuttons">
+    <ion-row >
+      <ion-col  col-6 style="max-height: 100%;">
+        <ion-button style="height:100%;width:100%;--box-shadow: none;" color="clear" (click)="select('lindo')"> 
+          <img src="assets/cosaslindas.png" >
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row >
+      <ion-col  col-6 style="max-height: 100%;">
+        <ion-button style="height:100%;width:100%;--box-shadow: none;" color="clear" (click)="select('feo')">
+          <img src="assets/cosasfeas.png" >
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!--ion-button class="form-group col-12" *ngIf="!showbuttons" style="height:99%;width:99%" for="upload-photo">
+    <ion-card *ngIf="localsele=='lindas'" for="upload-photo">
+      Subir algo lindo
+    </ion-card>
+    <ion-card *ngIf="localsele=='feas'" for="upload-photo">
+      Subir algo feo
+    </ion-card><br>
+    <ion-input type="file"
+    id="upload-photo"
+    #userPhoto
+    (change)="onFileSelected($event)"
+    name="image"
+    autocomplete="off"
+    class="btn btn-primary btn-lg btn-block"
+    accept="image/*"
+    />
+</ion-button-->
+
+
+  
+
+
+ 
+
+
+
+    <ion-grid *ngIf="!showbuttons">
+      <ion-row style="height:60%">
+        <ion-col  col-6 style="max-height: 100%;" >
+          <ion-button style="height:99%;width:99%; --box-shadow: none;max-height: 100%;" color="clear">
+            <label class="btn btn-default btn-file" style="height:99%;width:99%">
+              
+          <ion-img src="assets/uploadlindo.png" *ngIf="localsele=='lindas'&&!newimage" style="height: 100%"></ion-img>
+          <ion-img src="assets/uploadfeo.png" *ngIf="localsele=='feas'&&!newimage" style="height: 100%"></ion-img>
+
+          <ion-card *ngIf="newimage" style="padding: 15px;width: 100%;height:90%">
+            <ion-card-subtitle  text-wrap>Click en la imagen</ion-card-subtitle> 
+            <ion-card-subtitle  text-wrap>para tomar nueva foto</ion-card-subtitle>
+          
+            <!--label >Click en la imagen para tomar nueva foto</label-->
+            <ion-button color="clear" style="height:98%;width:98%;--box-shadow: none;" (click)="selectImage()">
+              <img [src]="newimage" (click)="selectImage()">
+            </ion-button>
+            <br>
+            <br>
+          </ion-card>
+          
+          
+
+          <!--input type="file" style="display: none;" 
+           (change)="onFileSelected($event)"
+            name="image"
+            autocomplete="off"
+            accept="image/*"
+           required-->
+        </label>
+      </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row style="height:35%">
+        <ion-col  col-6 style="max-height: 100%;">
+          <ion-button  style="height:99%;width:99% ; --box-shadow: none;" color="clear" *ngIf="!newimage">
+            <label class="btn btn-default btn-file" style="height:99%;width:99%">
+          <!--ion-img src="assets/subircosalinda.png" *ngIf="localsele=='lindas'&&!newimage" ></ion-img>
+          <ion-img src="assets/subircosafea.png" *ngIf="localsele=='feas'&&!newimage" ></ion-img-->
+            <ion-button shape="round" color="secondary" style="height:100%" (click)="selectImage()">
+              <img src="assets/cameraLogin.png">
+            </ion-button>
+          <br><br>
+          <ion-button *ngIf="newimage" (click)="subFoto()" style="height:50%">
+            <ion-img src="assets/subircosalinda.png" *ngIf="localsele=='lindas'" style="height: 100%"></ion-img>
+            <ion-img src="assets/subircosafea.png" *ngIf="localsele=='feas'" style="height: 100%"></ion-img>
+          </ion-button>
+
+          
+          <!--input type="file" style="display: none;" 
+           (change)="onFileSelected($event)"
+            name="image"
+            autocomplete="off"
+            accept="image/*"
+           required
+          -->
+           
+          </label>
+        </ion-button>
+        <ion-button  style="height:99%;width:99%; --box-shadow: none;" color="clear" *ngIf="newimage" (click)="subFoto()">
+          <label class="btn btn-default btn-file" style="height:99%;width:99%">
+          <ion-img src="assets/subircosalinda.png" *ngIf="localsele=='lindas'&&!newimage" style="height:90%"></ion-img>
+          <ion-img src="assets/subircosafea.png" *ngIf="localsele=='feas'&&!newimage" style="height:90%"></ion-img>
+          
+          <ion-img src="assets/subircosalinda.png" *ngIf="localsele=='lindas'" style="height:90%"></ion-img>
+          <ion-img src="assets/subircosafea.png" *ngIf="localsele=='feas'" style="height:90%"></ion-img>
+       
+         
+        </label>
+      </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+ 
+
+<ion-fab slot="fixed" vertical="bottom" horizontal="end" color="success" *ngIf="!showbuttons">
+  <ion-fab-button (click)="reselect()">
+    <ion-icon name="arrow-redo-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+<ion-fab slot="fixed" vertical="top" horizontal="end" *ngIf="showbuttons">
+  <ion-fab-button (click)="logou()"  color="danger">
+    <ion-icon name="exit-outline" color="light"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+
+
+</ion-content>

@@ -1,0 +1,62 @@
+<ion-content [fullscreen]="true">
+    <!--ion-item>
+        <ion-label>Circular</ion-label>
+        <ion-spinner name="circular"></ion-spinner>
+    </ion-item-->
+    <br><br><br><br>
+    <img src="assets/cameraLogin.png"  class="center">
+    <form [formGroup]="ionicForm" (ngSubmit)="login()" novalidate>
+      <ion-card id="NongModel">
+        <ion-card>
+          
+
+          
+          <ion-item style="border: 3px;" class="transparent" >
+            <ion-label class="transparent" ><ion-icon name="at-outline"></ion-icon></ion-label>
+            <ion-input  class="transparent"  [(ngModel)]="email" placeholder="Correo" type="email" formControlName="email"></ion-input>
+          </ion-item>
+        <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
+          Por favor ingrese una dirección de correo.
+        </span>
+        <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.pattern">
+          Por favor ingrese una dirección de correo valdia.
+        </span>
+          <ion-item>
+            <ion-label><ion-icon name="lock-closed-outline"></ion-icon></ion-label>
+            <ion-input [(ngModel)]="pass" placeholder="Contraseña" type="password" formControlName="password"></ion-input>
+          </ion-item>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.required">
+            Por favor ingrese una contraseña.
+          </span>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.pattern">
+            La contraseña debe contener una mayúscula y un número como minimo.
+          </span>
+          <!--ion-label (click)="taler()" class="ion-float-right">Olvidé mi contraseña</ion-label--><br><br>
+          <ion-button color="primary" ion-button expand="block" type="submit" >Ingresar</ion-button>
+        </ion-card>
+      </ion-card>
+    </form>
+    
+      <br>
+      <ion-fab slot="fixed" vertical="bottom" horizontal="start">
+        <ion-fab-button>
+          <ion-icon name="chevron-up-circle"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="top">
+          <!--ion-fab-button color="tertiary" (click)="loadUser(1)">
+            1
+          </ion-fab-button-->
+          <ion-button color="primary" ion-button block (click)="loadUser(1)">(test) Usuario1</ion-button>
+          <ion-button color="primary" ion-button block (click)="loadUser(2)">(test) Usuario2</ion-button>
+          <ion-button color="primary" ion-button block (click)="loadUser(3)">(test) Usuario3</ion-button>
+          <ion-button color="primary" ion-button block (click)="loadUser(4)">(test) Usuario4</ion-button>
+          <ion-button color="primary" ion-button block (click)="loadUser(5)">(test) Usuario5</ion-button>
+          <ion-button color="primary" ion-button block (click)="loadUser(6)">(test) Usuario6</ion-button>
+          <ion-button color="primary" ion-button block (click)="loadUser(7)">(test) Usuario7</ion-button>
+        </ion-fab-list>
+      </ion-fab>
+      
+      <!--ion-button color="primary" ion-button block (click)="goBack()">skip</ion-button><br>
+      <ion-button color="primary" ion-button block (click)="animsplash()">test splash</ion-button-->
+    
+    </ion-content>
